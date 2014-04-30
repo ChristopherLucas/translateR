@@ -7,6 +7,7 @@ install
 -
 
 library(devtools)
+
 install_github('CLTM', username = 'ChristopherLucas')
 
 functions
