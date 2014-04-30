@@ -1,0 +1,3 @@
+importFrom('RJSONIO', fromJSON)
+importFrom('RCurl', getURL)
+export('translate')
