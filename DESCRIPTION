@@ -1,7 +1,0 @@
-Package: CLTM
-Version: 0.1
-Date: 2014-04-29
-Type: Package
-Title: R Package for Cross-Lingual Topic Modeling
-LazyData: true
-License: GPL (>= 2)
