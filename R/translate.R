@@ -11,7 +11,7 @@ print.translateClass <- function(x){
 translate <- function(to.translate, source.lang, target.lang, key, token = FALSE){
     if(token == FALSE){out <- translateText(to.translate, source.lang, target.lang, key)}
     else{out <- translateToken(to.translate, source.lang, target.lang, key)}
-#    class(out) <- 'translateClass'
+    class(out) <- 'translateClass'
     return(out)
 }
 
