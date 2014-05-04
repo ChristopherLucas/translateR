@@ -57,5 +57,3 @@ rtt <- function(t.obj){
     lv.dist <- stringdist(original.text, translated.back, 'lv')
     return(lv.dist)
 }
-
-test <- translate('this is a test', 'en', 'zh-CN', 'AIzaSyBogK1aUqESeC8JXnHdFhPA_OZWGsp6iA4', token = TRUE)
