@@ -1,7 +1,7 @@
 importFrom("rmmseg4j",mmseg4j)
 importFrom("tm",MC_tokenizer)
 importFrom("RJSONIO",fromJSON)
-importFrom("RCurl",getURL)
+importFrom("RCurl",getURL,curlEscape)
 importFrom("stringdist",stringdist)
 export("translate",
 	"rtt")
