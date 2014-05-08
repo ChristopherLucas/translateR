@@ -1,9 +1,3 @@
-library(RCurl)
-library(RJSONIO)
-library(stringdist)
-library(rmmseg4j)
-library(tm)
-
 print.translateClass <- function(x){
     print(x$translated.text)
 }
