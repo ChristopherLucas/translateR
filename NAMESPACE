@@ -3,4 +3,6 @@ importFrom("tm",MC_tokenizer)
 importFrom("RJSONIO",fromJSON)
 importFrom("RCurl",getURL,curlEscape)
 importFrom("stringdist",stringdist)
-exportPattern("^[^\\.]")
+export("translate",
+       "print.translateClass",
+	"rtt")
