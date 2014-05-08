@@ -19,7 +19,7 @@ translateText <- function(to.translate, source.lang, target.lang, key){
 translateToken <- function(to.translate, source.lang, target.lang, key){
     translated <- lapply(tokenize(to.translate, source.lang), function(x)
                          gTranslate(x, source.lang, target.lang, key))
-    translated <- paste(unlist(translated), collapse='')
+    translated <- paste(unlist(translated), collapse=' ')
     out <- list(translated.text = translated, source.text = to.translate,
                 source.lang = source.lang, target.lang = target.lang, key = key)
     return(out)
