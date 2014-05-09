@@ -45,7 +45,6 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
 
 rtt <- function(t.obj){
     original.text <- tolower(t.obj$source.text)
-    print(original.text)
     translated.back <- tolower(translate(t.obj$translated.text, t.obj$target.lang,
                                          t.obj$source.lang, t.obj$key)$translated.text)
     lv.dist <- stringdist(original.text, translated.back, 'lv')
