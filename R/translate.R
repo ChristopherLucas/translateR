@@ -27,7 +27,7 @@ translateToken <- function(to.translate, source.lang, target.lang, key){
 
 tokenize <- function(string, source.lang){
     if(source.lang == 'zh-CN'){return(mmseg4j(string))}
-    else if(source.lang == 'ar'){return(strsplit(string, split = ' '))}
+    else if(source.lang == 'ar'){return(unlist(strsplit(string, split = ' ')))}
     else{return(MC_tokenizer(string))}
 }
 
