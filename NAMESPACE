@@ -1,4 +1,4 @@
-importFrom("rmmseg4j",mmseg4j)
+importFrom("rmmseg4j",mmseg4j,.jnew)
 importFrom("tm",MC_tokenizer)
 importFrom("RJSONIO",fromJSON)
 importFrom("RCurl",getURL,curlEscape)
