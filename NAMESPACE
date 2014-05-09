@@ -1,9 +1,9 @@
 importFrom("rmmseg4j",mmseg4j)
-importFrom('rJava',.jnew)
 importFrom("tm",MC_tokenizer)
 importFrom("RJSONIO",fromJSON)
 importFrom("RCurl",getURL,curlEscape)
 importFrom("stringdist",stringdist)
+import('rJava')
 export("translate",
        "print.translateClass",
 	"rtt")
