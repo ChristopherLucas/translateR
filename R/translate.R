@@ -11,7 +11,9 @@ translate <- function(to.translate, source.lang, target.lang, key){
 translateText <- function(to.translate, source.lang, target.lang, key){
     to.translate <- stripNewline(to.translate)
     to.translate <- combine(to.translate)
+    print(to.translate)
     translated <- gTranslate(to.translate, source.lang, target.lang, key)
+    print(translated)
     translated <- splitTranslated(translated)
     out <- list(translated.text = translated, source.text = to.translate,
                 source.lang = source.lang, target.lang = target.lang, key = key)
@@ -29,7 +31,6 @@ combine <- function(to.translate){
 }
 
 splitTranslated <- function(translated){
-    print(translated)
     translated <- unlist(strsplit(translated, '\n'))
     return(translated)
 }
