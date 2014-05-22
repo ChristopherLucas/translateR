@@ -26,7 +26,7 @@ stripNewline <- function(to.translate){
 }
 
 combine <- function(to.translate){
-    to.translate <- paste(to.translate, collapse = " \n")
+    to.translate <- paste(to.translate, collapse = " \n ")
     return(to.translate)
 }
 
