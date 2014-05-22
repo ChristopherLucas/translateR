@@ -3,6 +3,13 @@ CLTM
 
 R Package for Cross-Language Topic Modeling
 
+installation
+-
+library(devtools)
+
+install_github('CLTM', username = 'ChristopherLucas')
+
+
 translate
 -
 
