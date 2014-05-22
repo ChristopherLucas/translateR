@@ -9,7 +9,6 @@ translate <- function(to.translate, source.lang, target.lang, key){
 }
 
 translateText <- function(to.translate, source.lang, target.lang, key){
-    to.translate <- stripNewline(to.translate)
     to.translate <- combine(to.translate)
     print(to.translate)
     translated <- gTranslate(to.translate, source.lang, target.lang, key)
@@ -20,18 +19,13 @@ translateText <- function(to.translate, source.lang, target.lang, key){
     return(out)
 }
 
-stripNewline <- function(to.translate){
-    to.translate <- unlist(lapply(to.translate, function(x) gsub('\n', ' ', x)))
-    return(to.translate)
-}
-
 combine <- function(to.translate){
-    to.translate <- paste(to.translate, collapse = " \n ")
+    to.translate <- paste(to.translate, collapse = " ----****---- ")
     return(to.translate)
 }
 
 splitTranslated <- function(translated){
-    translated <- unlist(strsplit(translated, '\n'))
+    translated <- unlist(strsplit(translated, '----****----'))
     return(translated)
 }
 
