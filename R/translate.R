@@ -2,33 +2,35 @@ print.translateClass <- function(x){
     print(x$translated.text)
 }
 
-translate <- function(to.translate, source.lang, target.lang, key, token = FALSE){
-    if(token == FALSE){out <- translateText(to.translate, source.lang, target.lang, key)}
-    else{out <- translateToken(to.translate, source.lang, target.lang, key)}
+translate <- function(to.translate, source.lang, target.lang, key){
+    out <- translateText(to.translate, source.lang, target.lang, key)
     class(out) <- 'translateClass'
     return(out)
 }
 
 translateText <- function(to.translate, source.lang, target.lang, key){
+    to.translate <- stripNewline(to.translate)
+    to.translate <- combine(to.translate)
     translated <- gTranslate(to.translate, source.lang, target.lang, key)
+    translated <- splitTranslated(translated)
     out <- list(translated.text = translated, source.text = to.translate,
                 source.lang = source.lang, target.lang = target.lang, key = key)
     return(out)
 }
 
-translateToken <- function(to.translate, source.lang, target.lang, key){
-    translated <- lapply(tokenize(to.translate, source.lang), function(x)
-                         gTranslate(x, source.lang, target.lang, key))
-    translated <- paste(unlist(translated), collapse=' ')
-    out <- list(translated.text = translated, source.text = to.translate,
-                source.lang = source.lang, target.lang = target.lang, key = key)
-    return(out)
+stripNewline <- function(to.translate){
+    to.translate <- unlist(lapply(to.translate, function(x) gsub('\n', ' ', x)))
+    return(to.translate)
 }
 
-tokenize <- function(string, source.lang){
-    if(source.lang == 'zh-CN'){return(mmseg4j(string))}
-    else if(source.lang == 'ar'){return(unlist(strsplit(string, split = ' ')))}
-    else{return(MC_tokenizer(string))}
+combine <- function(to.translate){
+    to.translate <- paste(to.translate, collapse = " \n")
+    return(to.translate)
+}
+
+splitTranslated <- function(translated){
+    translated <- unlist(strsplit(translated, '\n'))
+    return(translated)
 }
 
 gTranslate <- function(to.translate, source.lang, target.lang, key){
