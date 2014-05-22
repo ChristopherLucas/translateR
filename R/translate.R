@@ -29,6 +29,7 @@ combine <- function(to.translate){
 }
 
 splitTranslated <- function(translated){
+    print(translated)
     translated <- unlist(strsplit(translated, '\n'))
     return(translated)
 }
