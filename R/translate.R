@@ -20,12 +20,12 @@ translateText <- function(to.translate, source.lang, target.lang, key){
 }
 
 combine <- function(to.translate){
-    to.translate <- paste(to.translate, collapse = " ----****---- ")
+    to.translate <- paste(to.translate, collapse = " ----~~~~---- ")
     return(to.translate)
 }
 
 splitTranslated <- function(translated){
-    translated <- unlist(strsplit(translated, '----****----'))
+    translated <- unlist(strsplit(translated, '----~~~~----'))
     return(translated)
 }
 
