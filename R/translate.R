@@ -25,7 +25,7 @@ combine <- function(to.translate){
 }
 
 splitTranslated <- function(translated){
-    translated <- unlist(strsplit(translated, '----12345-54321----'))
+    translated <- unlist(strsplit(translated, '---- 12345-54321 ----'))
     return(translated)
 }
 
