@@ -26,7 +26,12 @@ combine <- function(to.translate){
 
 splitTranslated <- function(translated){
     translated <- unlist(strsplit(translated, '---- 12345-54321 ----'))
+    translated <- unlist(lapply(translated, function(x) trim(x)))
     return(translated)
+}
+
+trim <- function( x ) {
+  gsub("(^[[:space:]]+|[[:space:]]+$)", "", x)
 }
 
 gTranslate <- function(to.translate, source.lang, target.lang, key){
