@@ -33,7 +33,7 @@ trim <- function( x ) {
   gsub("(^[[:space:]]+|[[:space:]]+$)", "", x)
 }
 
-strdehtml <- function(s) {
+strdehtml <- function(s){
     ret <- gsubfn("&#([0-9]+);", function(x) rawToChar(as.raw(as.numeric(x))), s)
     ret <- gsubfn("&([^;]+);", function(x) htmlchars[x], ret)
     return(ret)
