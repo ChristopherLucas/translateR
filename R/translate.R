@@ -60,7 +60,7 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
 
 querySplit <- function(query){
     string.vec <- c()
-    start.and.finish <- str_locate_all(query, '----1234554321----')
+    start.and.finish <- str_locate_all(query, '----1234554321----')[[1]]
     prev.end <- 0
     print(start.and.finish)
     print(nchar(query))
