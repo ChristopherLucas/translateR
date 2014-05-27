@@ -33,6 +33,12 @@ trim <- function( x ) {
   gsub("(^[[:space:]]+|[[:space:]]+$)", "", x)
 }
 
+strdehtml <- function(s) {
+    ret <- gsubfn("&#([0-9]+);", function(x) rawToChar(as.raw(as.numeric(x))), s)
+    ret <- gsubfn("&([^;]+);", function(x) htmlchars[x], ret)
+    return(ret)
+}
+
 gTranslate <- function(to.translate, source.lang, target.lang, key){
     base <- 'https://www.googleapis.com/language/translate/v2?'
     key.str <- paste('key=', key, sep = '')
@@ -42,7 +48,7 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
     api.url <- paste(base, key.str, query, source.str, target.str, sep = '')
 
     translated <- fromJSON(getURL(api.url))$data$translations[[1]]
-    translated <- unname(curlUnescape(translated))
+    translated <- unname(strdehtml(translated))
     return(translated)
 }
 

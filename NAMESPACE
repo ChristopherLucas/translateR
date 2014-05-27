@@ -1,4 +1,5 @@
 importFrom("RJSONIO",fromJSON)
+importFrom("gsubfn",strdehtml)
 importFrom("RCurl",getURL,curlEscape,curlUnescape)
 importFrom("stringdist",stringdist)
 export("translate",
