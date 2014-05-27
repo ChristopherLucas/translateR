@@ -43,13 +43,31 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
     base <- 'https://www.googleapis.com/language/translate/v2?'
     key.str <- paste('key=', key, sep = '')
     query <- paste('&q=', curlEscape(to.translate), sep = '')
+    queries <- querySplit(query)
     source.str <- paste('&source=', source.lang, sep = '')
     target.str <- paste('&target=', target.lang, sep = '')
-    api.url <- paste(base, key.str, query, source.str, target.str, sep = '')
 
-    translated <- fromJSON(getURL(api.url))$data$translations[[1]]
-    translated <- unname(strdehtml(translated))
-    return(translated)
+    translated.out <- c()
+    for(query in queries){
+        api.url <- paste(base, key.str, query, source.str, target.str, sep = '')
+
+        translated <- fromJSON(getURL(api.url))$data$translations[[1]]
+        translated <- unname(strdehtml(translated))
+        translated.out <- combine(translated.out, translated)
+    }
+    return(translated.out)
+}
+
+querySplit <- function(query){
+    string.vec <- c()
+    start.and.finish <- str_locate_all(query, '----1234554321----')
+    prev.end <- 0
+    for(i in seq(0, nchar(query), 1000)){
+        start.i <- which.min(abs(start.and.finish$start - i))
+        string.vec <- c(string.vec, query[prev.end:start.and.finish$start[i]])
+        prev.end <- start.and.finish$end[i]
+    }
+    return(string.vec)
 }
 
 rtt <- function(t.obj){
