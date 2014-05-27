@@ -62,6 +62,8 @@ querySplit <- function(query){
     string.vec <- c()
     start.and.finish <- str_locate_all(query, '----1234554321----')
     prev.end <- 0
+    print(query)
+    print(nchar(query))
     for(i in seq(0, nchar(query), 1000)){
         start.i <- which.min(abs(start.and.finish$start - i))
         string.vec <- c(string.vec, query[prev.end:start.and.finish$start[i]])
