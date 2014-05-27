@@ -19,12 +19,12 @@ translateText <- function(to.translate, source.lang, target.lang, key){
 }
 
 combine <- function(to.translate){
-    to.translate <- paste(to.translate, collapse = " ----12345-54321---- ")
+    to.translate <- paste(to.translate, collapse = " ----1234554321---- ")
     return(to.translate)
 }
 
 splitTranslated <- function(translated){
-    translated <- unlist(strsplit(translated, '---- 12345-54321 ----'))
+    translated <- unlist(strsplit(translated, '---- 1234554321 ----'))
     translated <- unlist(lapply(translated, function(x) trim(x)))
     return(translated)
 }
