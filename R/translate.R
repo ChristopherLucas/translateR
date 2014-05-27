@@ -10,9 +10,7 @@ translate <- function(to.translate, source.lang, target.lang, key){
 
 translateText <- function(to.translate, source.lang, target.lang, key){
     to.translate <- combine(to.translate)
-    print(paste('to.translate:', to.translate))
     translated <- gTranslate(to.translate, source.lang, target.lang, key)
-    print(paste('translated:', translated))
     translated <- splitTranslated(translated)
     out <- list(translated.text = translated, source.text = to.translate,
                 source.lang = source.lang, target.lang = target.lang, key = key)
@@ -42,9 +40,7 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
     target.str <- paste('&target=', target.lang, sep = '')
     api.url <- paste(base, key.str, query, source.str, target.str, sep = '')
 
-    print(paste('api url:', api.url))
     translated <- fromJSON(getURL(api.url))$data$translations[[1]]
-    print(paste('translated in gTranslate:', translated))
     translated <- unname(translated)
     return(translated)
 }
