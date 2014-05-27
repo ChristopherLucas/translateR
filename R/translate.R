@@ -9,10 +9,11 @@ translate <- function(to.translate, source.lang, target.lang, key){
 }
 
 translateText <- function(to.translate, source.lang, target.lang, key){
+    to.translate.original <- to.translate
     to.translate <- combine(to.translate)
     translated <- gTranslate(to.translate, source.lang, target.lang, key)
     translated <- splitTranslated(translated)
-    out <- list(translated.text = translated, source.text = to.translate,
+    out <- list(translated.text = translated, source.text = to.translate.original,
                 source.lang = source.lang, target.lang = target.lang, key = key)
     return(out)
 }
