@@ -42,7 +42,7 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
     api.url <- paste(base, key.str, query, source.str, target.str, sep = '')
 
     translated <- fromJSON(getURL(api.url))$data$translations[[1]]
-    translated <- unname(translated)
+    translated <- unname(curlUnescape(translated))
     return(translated)
 }
 
