@@ -1,5 +1,5 @@
 importFrom("RJSONIO",fromJSON)
-importFrom("RCurl",getURL,curlEscape)
+importFrom("RCurl",getURL,curlEscape,curlUnescape)
 importFrom("stringdist",stringdist)
 export("translate",
        "print.translateClass",
