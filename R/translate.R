@@ -10,6 +10,7 @@ translate <- function(to.translate, source.lang, target.lang, key){
 
 translateText <- function(to.translate, source.lang, target.lang, key){
     to.translate.original <- to.translate
+    to.translate <- unlist(lapply(to.translate, function(x) removeDash(x)))
     to.translate <- combine(to.translate)
     translated <- gTranslate(to.translate, source.lang, target.lang, key)
     translated <- splitTranslated(translated)
@@ -19,18 +20,22 @@ translateText <- function(to.translate, source.lang, target.lang, key){
 }
 
 combine <- function(to.translate){
-    to.translate <- paste(to.translate, collapse = " ----1234554321---- ")
+    to.translate <- paste(to.translate, collapse = ' - ')
     return(to.translate)
 }
 
 splitTranslated <- function(translated){
-    translated <- unlist(strsplit(translated, '---- 1234554321 ----'))
+    translated <- unlist(strsplit(translated, '-'))
     translated <- unlist(lapply(translated, function(x) trim(x)))
     return(translated)
 }
 
 trim <- function( x ) {
   gsub("(^[[:space:]]+|[[:space:]]+$)", "", x)
+}
+
+removeDash <- function( x ) {
+  gsub("-", "", x)
 }
 
 strdehtml <- function(s){
@@ -42,35 +47,36 @@ strdehtml <- function(s){
 gTranslate <- function(to.translate, source.lang, target.lang, key){
     base <- 'https://www.googleapis.com/language/translate/v2?'
     key.str <- paste('key=', key, sep = '')
-    query <- paste('&q=', curlEscape(to.translate), sep = '')
+    query <- curlEscape(to.translate)
     queries <- querySplit(query)
     source.str <- paste('&source=', source.lang, sep = '')
     target.str <- paste('&target=', target.lang, sep = '')
 
     translated.out <- c()
-    for(query in queries){
-        api.url <- paste(base, key.str, query, source.str, target.str, sep = '')
-
+    for(q in queries){
+        print(q)
+        q <- paste('&q=', q, sep = '')
+        
+        api.url <- paste(base, key.str, q, source.str, target.str, sep = '')
+        print(api.url)
         translated <- fromJSON(getURL(api.url))$data$translations[[1]]
         translated <- unname(strdehtml(translated))
-        print(translated)
         translated.out <- combine(c(translated.out, translated))
     }
     return(translated.out)
 }
-
+ 
 querySplit <- function(query){
+    if(nchar(query) < 1900){return(query)}
     string.vec <- c()
-    start.and.finish <- str_locate_all(query, '----1234554321----')[[1]]
-    if(nchar(
+    start.and.finish <- str_locate_all(query, '-')[[1]]
     prev.end <- 0
-    print(start.and.finish)
-    print(nchar(query))
-    for(i in seq(0, nchar(query), 1000)){
-        start.index <- which.min(abs(start.and.finish[,1] - i))
-        string.vec <- c(string.vec, substr(query, prev.end, start.and.finish[,1][start.index]))
-        prev.end <- start.and.finish[,2][start.index]
+    for(i in seq(1000, nchar(query), 1000)){
+        end.index <- which.min(abs(start.and.finish[,1] - i))
+        string.vec <- c(string.vec, substr(query, prev.end, start.and.finish[,1][end.index] - 1))
+        prev.end <- start.and.finish[,2][end.index] + 1
     }
+    string.vec <- c(string.vec, substr(query, prev.end, nchar(query)))
     return(string.vec)
 }
 
