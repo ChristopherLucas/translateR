@@ -20,7 +20,7 @@ translateText <- function(to.translate, source.lang, target.lang, key){
 }
 
 combine <- function(to.translate){
-    to.translate <- paste(to.translate, collapse = ' - ')
+    to.translate <- paste(to.translate, collapse = ' -\n ')
     return(to.translate)
 }
 
