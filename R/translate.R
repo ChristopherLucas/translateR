@@ -39,7 +39,7 @@ trim <- function( x ) {
 }
 
 removePunc <- function(str){
-    str <- gsub('[[:punct:]]','',str)
+    str <- gsub('[[:punct:]]',' ',str)
     return(str)
 }
 
