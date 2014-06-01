@@ -47,6 +47,7 @@ strdehtml <- function(s){
 gTranslate <- function(to.translate, source.lang, target.lang, key){
     base <- 'https://www.googleapis.com/language/translate/v2?'
     key.str <- paste('key=', key, sep = '')
+    print(to.translate)
     query <- curlEscape(to.translate)
     queries <- querySplit(query)
     source.str <- paste('&source=', source.lang, sep = '')
@@ -57,6 +58,7 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
         q <- paste('&q=', q, sep = '')
         
         api.url <- paste(base, key.str, q, source.str, target.str, sep = '')
+        print(api.url)
         translated <- fromJSON(getURL(api.url))$data$translations[[1]]
         translated <- unname(strdehtml(translated))
         translated.out <- combine(c(translated.out, translated))
