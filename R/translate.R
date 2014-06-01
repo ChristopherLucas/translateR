@@ -14,6 +14,9 @@ translateText <- function(to.translate, source.lang, target.lang, key){
     to.translate <- combine(to.translate)
     translated <- gTranslate(to.translate, source.lang, target.lang, key)
     translated <- splitTranslated(translated)
+    if(length(translated) != length(to.translate.original)){
+        stop('ERROR: Translated object not of equal length to untranslated')
+    }
     out <- list(translated.text = translated, source.text = to.translate.original,
                 source.lang = source.lang, target.lang = target.lang, key = key)
     return(out)
@@ -48,7 +51,6 @@ strdehtml <- function(s){
 gTranslate <- function(to.translate, source.lang, target.lang, key){
     base <- 'https://www.googleapis.com/language/translate/v2?'
     key.str <- paste('key=', key, sep = '')
-    print(to.translate)
     query <- curlEscape(to.translate)
     queries <- querySplit(query)
     source.str <- paste('&source=', source.lang, sep = '')
@@ -59,7 +61,6 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
         q <- paste('&q=', q, sep = '')
         
         api.url <- paste(base, key.str, q, source.str, target.str, sep = '')
-        print(api.url)
         translated <- fromJSON(getURL(api.url))$data$translations[[1]]
         translated <- unname(strdehtml(translated))
         translated.out <- combine(c(translated.out, translated))
