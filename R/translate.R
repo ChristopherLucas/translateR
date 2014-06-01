@@ -67,7 +67,7 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
             if(class(translated) == 'character'){
                 break
             }
-            print('User Rate Limit Exceeded. Pausing for 10s')
+            print('User Rate Limit Exceeded. Pausing for 60s.')
             Sys.sleep(10)
         }
         translated <- unname(strdehtml(translated))
