@@ -68,7 +68,7 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
                 break
             }
             print('User Rate Limit Exceeded. Pausing for 60s.')
-            Sys.sleep(10)
+            Sys.sleep(60)
         }
         translated <- unname(strdehtml(translated))
         translated.out <- combine(c(translated.out, translated))
