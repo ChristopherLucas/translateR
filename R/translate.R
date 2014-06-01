@@ -60,10 +60,15 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
     translated.out <- c()
     for(q in queries){
         q <- paste('&q=', q, sep = '')
-        
         api.url <- paste(base, key.str, q, source.str, target.str, sep = '')
-        print(api.url)
-        translated <- fromJSON(getURL(api.url))$data$translations[[1]]
+
+        Sys.sleep(5)
+
+        while(1){
+            translated <- tryCatch(fromJSON(getURL(api.url))$data$translations[[1]], error = function(e) e)
+            print(class(translated))
+            break
+        }
         translated <- unname(strdehtml(translated))
         translated.out <- combine(c(translated.out, translated))
     }
