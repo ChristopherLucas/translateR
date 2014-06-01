@@ -6,8 +6,8 @@ translate <- function(to.translate, source.lang, target.lang, key){
     out <- translateText(to.translate, source.lang, target.lang, key)
     class(out) <- 'translateClass'
     return(out)
-}
 
+}
 translateText <- function(to.translate, source.lang, target.lang, key){
     to.translate.original <- to.translate
     to.translate <- unlist(lapply(to.translate, function(x) removeDash(x)))
@@ -20,12 +20,12 @@ translateText <- function(to.translate, source.lang, target.lang, key){
 }
 
 combine <- function(to.translate){
-    to.translate <- paste(to.translate, collapse = ' --\n ')
+    to.translate <- paste(to.translate, collapse = ' _-\n ')
     return(to.translate)
 }
 
 splitTranslated <- function(translated){
-    translated <- unlist(strsplit(translated, '--'))
+    translated <- unlist(strsplit(translated, '_-'))
     translated <- unlist(lapply(translated, function(x) trim(x)))
     return(translated)
 }
@@ -69,7 +69,7 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
 querySplit <- function(query){
     if(nchar(query) < 1900){return(query)}
     string.vec <- c()
-    start.and.finish <- str_locate_all(query, '--')[[1]]
+    start.and.finish <- str_locate_all(query, '_-')[[1]]
     prev.end <- 0
     for(i in seq(1000, nchar(query), 1000)){
         end.index <- which.min(abs(start.and.finish[,1] - i))
