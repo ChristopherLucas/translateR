@@ -35,8 +35,8 @@ trim <- function( x ) {
 }
 
 removeDash <- function( x ) {
-  x <- gsub("(", "", x)
-  x <- gsub(")", "", x)
+  x <- gsub("\\(", "", x)
+  x <- gsub("\\)", "", x)
   return(x)
 }
 
