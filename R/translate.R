@@ -65,8 +65,6 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
         while(1){
             translated <- tryCatch(fromJSON(getURL(api.url))$data$translations[[1]], error = function(e) e)
             if(class(translated) == 'character'){
-                print(class(translated))
-                print('true')
                 break
             }
             print('User Rate Limit Exceeded. Pausing for 10s')
