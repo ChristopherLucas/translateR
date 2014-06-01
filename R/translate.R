@@ -64,8 +64,7 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
 
         while(1){
             translated <- tryCatch(fromJSON(getURL(api.url))$data$translations[[1]], error = function(e) e)
-            print(class(translated))
-            break
+            if(class(translated) == 'character'){break}
         }
         translated <- unname(strdehtml(translated))
         translated.out <- combine(c(translated.out, translated))
