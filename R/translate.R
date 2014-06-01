@@ -35,7 +35,7 @@ trim <- function( x ) {
 }
 
 removeDash <- function( x ) {
-  gsub("-", "", x)
+  gsub("~", "", x)
 }
 
 strdehtml <- function(s){
