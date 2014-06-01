@@ -10,7 +10,8 @@ translate <- function(to.translate, source.lang, target.lang, key){
 }
 translateText <- function(to.translate, source.lang, target.lang, key){
     to.translate.original <- to.translate
-    to.translate <- unlist(lapply(to.translate, function(x) removeDash(x)))
+    to.translate <- unlist(lapply(to.translate, function(x) removePunc(x)))
+    
     to.translate <- combine(to.translate)
     translated <- gTranslate(to.translate, source.lang, target.lang, key)
     translated <- splitTranslated(translated)
@@ -37,9 +38,9 @@ trim <- function( x ) {
   gsub("(^[[:space:]]+|[[:space:]]+$)", "", x)
 }
 
-removeDash <- function( x ) {
-  x <- gsub("\\(", "", x)
-  return(x)
+removePunc <- function(str){
+    str <- gsub('[[:punct:]]','',str)
+    return(str)
 }
 
 strdehtml <- function(s){
