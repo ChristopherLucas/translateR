@@ -25,8 +25,7 @@ combine <- function(to.translate){
 }
 
 splitTranslated <- function(translated){
-    print(translated)
-    translated <- unlist(strsplit(translated, '()'))
+    translated <- unlist(strsplit(translated, '\\(\\)'))
     translated <- unlist(lapply(translated, function(x) trim(x)))
     return(translated)
 }
