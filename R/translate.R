@@ -25,6 +25,7 @@ combine <- function(to.translate){
 }
 
 splitTranslated <- function(translated){
+    print(translated)
     translated <- unlist(strsplit(translated, '()'))
     translated <- unlist(lapply(translated, function(x) trim(x)))
     return(translated)
@@ -35,6 +36,8 @@ trim <- function( x ) {
 }
 
 removeDash <- function( x ) {
+  x <- gsub("\\(", "", x)
+  x <- gsub("\\)", "", x)
   return(x)
 }
 
