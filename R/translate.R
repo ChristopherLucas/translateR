@@ -61,7 +61,7 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
     for(q in queries){
         q <- paste('&q=', q, sep = '')
         api.url <- paste(base, key.str, q, source.str, target.str, sep = '')
-
+        print(api.url)
         while(1){
             translated <- tryCatch(fromJSON(getURL(api.url))$data$translations[[1]], error = function(e) e)
             if(class(translated) == 'character'){
