@@ -28,7 +28,7 @@ translateText <- function(to.translate, source.lang, target.lang, key){
 splitLong <- function(to.translate){
     if(nchar(curlEscape(to.translate)) > 1900){
         period.inds <- str_locate_all(to.translate, ' ')[[1]][,1]
-        slice.at <- which(min(abs(period.inds - 100)) == abs(period.inds - 100)) - 1
+        slice.at <- which(min(abs(period.inds - 300)) == abs(period.inds - 300)) - 1
         substring(to.translate, slice.at) <- "("
     }
     return(to.translate)
