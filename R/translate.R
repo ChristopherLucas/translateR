@@ -11,7 +11,8 @@ translate <- function(to.translate, source.lang, target.lang, key){
 translateText <- function(to.translate, source.lang, target.lang, key){
     to.translate.original <- to.translate
     to.translate <- unlist(lapply(to.translate, function(x) removePunc(x)))
-    
+
+    to.translate <- unlist(lapply(to.translate, function(x) splitLong))
     to.translate <- combine(to.translate)
     translated <- gTranslate(to.translate, source.lang, target.lang, key)
     translated <- splitTranslated(translated)
@@ -37,7 +38,6 @@ splitLong <- function(to.translate){
 }
 
 combine <- function(to.translate){
-    to.translate <- splitLong(to.translate)
     to.translate <- paste(to.translate, collapse = ' (\n ')
     return(to.translate)
 }
