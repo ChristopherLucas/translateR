@@ -27,13 +27,9 @@ translateText <- function(to.translate, source.lang, target.lang, key){
 
 splitLong <- function(to.translate){
     if(nchar(curlEscape(to.translate)) > 1900){
-        print('here')
         period.inds <- str_locate_all(to.translate, ' ')[[1]][,1]
         slice.at <- which(min(abs(period.inds - 100)) == abs(period.inds - 100)) - 1
-        print(slice.at)
-        print(to.translate)
         substring(to.translate, slice.at) <- "("
-        print(to.translate)
     }
     return(to.translate)
 }
@@ -99,9 +95,6 @@ querySplit <- function(query){
     prev.end <- 0
     for(i in seq(1000, nchar(query), 1000)){
         end.index <- which.min(abs(start.and.finish[,1] - i))
-        print(query)
-        print(prev.end)
-        print(start.and.finish[,1][end.index] - 1)
         string.vec <- c(string.vec, substr(query, prev.end, start.and.finish[,1][end.index] - 1))
         prev.end <- start.and.finish[,2][end.index] + 1
     }
