@@ -28,7 +28,7 @@ splitLong <- function(to.translate){
         print('here')
         period.inds <- str_locate_all(to.translate, '\\.')[[1]][,1]
         slice.at <- which(min(abs(period.inds - 1900)) == abs(period.inds - 100)) - 1
-        print(slide.at)
+        print(slice.at)
         print(to.translate)
         substring(to.translate, slice.at) <- "("
     }
