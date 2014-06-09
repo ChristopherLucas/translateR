@@ -16,6 +16,7 @@ translateText <- function(to.translate, source.lang, target.lang, key){
     to.translate <- combine(to.translate)
     translated <- gTranslate(to.translate, source.lang, target.lang, key)
 #    translated <- splitTranslated(translated)
+
     if(length(translated) != length(to.translate.original)){
         stop('ERROR: Translated object not of equal length to untranslated')
     }
