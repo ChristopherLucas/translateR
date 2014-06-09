@@ -12,10 +12,9 @@ translateText <- function(to.translate, source.lang, target.lang, key){
     to.translate.original <- to.translate
     to.translate <- unlist(lapply(to.translate, function(x) removePunc(x)))
 
-    print(to.translate)
     to.translate <- unlist(lapply(to.translate, function(x) splitLong(x)))
-    print(to.translate)
     to.translate <- combine(to.translate)
+    print(to.translate)
     translated <- gTranslate(to.translate, source.lang, target.lang, key)
     translated <- splitTranslated(translated)
     if(length(translated) != length(to.translate.original)){
