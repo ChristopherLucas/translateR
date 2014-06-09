@@ -23,7 +23,17 @@ translateText <- function(to.translate, source.lang, target.lang, key){
     return(out)
 }
 
+splitLong <- function(to.translate){
+    if(nchar(to.translate) > 1900){
+        period.inds <- str_locate_all(to.translate, '\\.')[[1]][,1]
+        slice.at <- which(min(abs(period.inds - 1900)) == abs(period.inds - 1900)) - 1
+        substring(to.translate, slice.at) <- '('
+    }
+    return(to.translate)
+}
+
 combine <- function(to.translate){
+    to.translate <- splitLong(to.translate)
     to.translate <- paste(to.translate, collapse = ' (\n ')
     return(to.translate)
 }
