@@ -15,6 +15,8 @@ translateText <- function(to.translate, source.lang, target.lang, key){
     to.translate <- unlist(lapply(to.translate, function(x) splitLong(x)))
     to.translate <- combine(to.translate)
     translated <- gTranslate(to.translate, source.lang, target.lang, key)
+    translated <- paste(translated, sep="", collapse="")
+    translated <- unlist(lapply(translated, function(x) removePunc(x)))
 #    translated <- splitTranslated(translated)
 
     if(length(translated) != length(to.translate.original)){
@@ -75,6 +77,7 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
 
         while(1){
             translated <- tryCatch(fromJSON(getURL(api.url))$data$translations[[1]], error = function(e) e)
+            print(translated)
             if(class(translated) == 'character'){
                 translated <- removePunc(translated)
                 break
