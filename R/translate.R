@@ -92,15 +92,15 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
 }
  
 querySplit <- function(query){
-    if(nchar(query) < 1900){return(query)}
+    if(nchar(query) <= 1900){return(query)}
     string.vec <- c()
     start.and.finish <- str_locate_all(query, curlEscape('('))[[1]]
     prev.end <- 0
     for(i in seq(1000, nchar(query), 1000)){
         end.index <- which.min(abs(start.and.finish[,1] - i))
-        print(query)
-        print(prev.end)
+
         print(start.and.finish[,1][end.index] - 1)
+        
         string.vec <- c(string.vec, substr(query, prev.end, start.and.finish[,1][end.index] - 1))
         prev.end <- start.and.finish[,2][end.index] + 1
     }
