@@ -7,7 +7,7 @@ INSTALLATION
 -
 library(devtools)
 
-install_github('CLTM', username = 'ChristopherLucas')
+install_github('translateR', username = 'ChristopherLucas')
 
 
 translate
