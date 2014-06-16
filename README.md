@@ -1,4 +1,4 @@
-CLTM
+translateR
 ====
 
 R Package for Cross-Language Topic Modeling
