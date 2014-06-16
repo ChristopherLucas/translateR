@@ -20,20 +20,11 @@ gTranslate <- function(to.translate, source.lang, target.lang, key){
     base <- 'https://www.googleapis.com/language/translate/v2?'
     key.str <- paste('key=', key, sep = '')
     query <- curlEscape(to.translate)
-    queries <- querySplit(query)
     source.str <- paste('&source=', source.lang, sep = '')
     target.str <- paste('&target=', target.lang, sep = '')
 
-    api.url <- paste(base, key.str, q, source.str, target.str, sep = '')
+    api.url <- paste(base, key.str, query, source.str, target.str, sep = '')
     
     translated <- tryCatch(fromJSON(getURL(api.url))$data$translations[[1]], error = function(e) e)
     return(translated)
-}
- 
-rtt <- function(t.obj){
-    original.text <- tolower(t.obj$source.text)
-    translated.back <- tolower(translate(t.obj$translated.text, t.obj$target.lang,
-                                         t.obj$source.lang, t.obj$key)$translated.text)
-    lv.dist <- stringdist(original.text, translated.back, 'lv')
-    return(lv.dist)
 }
