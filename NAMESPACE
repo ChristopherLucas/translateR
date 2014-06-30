@@ -1,7 +1,4 @@
 importFrom("RJSONIO",fromJSON)
-importFrom("gsubfn",gsubfn)
 importFrom("RCurl",getURL,curlEscape,curlUnescape)
-importFrom("stringdist",stringdist)
-importFrom("stringr",str_locate_all)
 export("translate",
        "print.translateClass")
