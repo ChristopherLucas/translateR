@@ -14,7 +14,19 @@ translate <- function(dataset = NULL, content.field = NULL, content.vec = NULL,
 
     # Do the translation
     if(translator == 'Google'){
-        translated <- googleTranslate(to.translate, api.key, source.lang, target.lang)
+        translated <- unname(
+            unlist(
+                mclapply(to.translate, function(x) googleTranslate(x, api.key, source.lang, target.lang))
+                )
+            )
+    }
+
+    if(translator == 'Microsoft'){
+        translated <- unname(
+            unlist(
+                mclapply(to.translate, function(x) microsoftTranslate(x, api.key, source.lang, target.lang))
+                )
+            )
     }
 
     # Figure out what we should return
@@ -34,9 +46,12 @@ googleTranslate <- function(to.translate, api.key, source.lang, target.lang){
     query <- paste('&q=', curlEscape(to.translate), sep = '')
     source.str <- paste('&source=', source.lang, sep = '')
     target.str <- paste('&target=', target.lang, sep = '')
-
-    api.url <- paste(base, key.str, query, source.str, target.str, sep = '')
     
+    api.url <- paste(base, key.str, query, source.str, target.str, sep = '')
+ 
     translated <- fromJSON(getURL(api.url))$data$translations[[1]]
     return(translated)
 }
+
+
+

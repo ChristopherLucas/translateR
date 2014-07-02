@@ -1,5 +1,6 @@
 importFrom("RJSONIO",fromJSON)
 importFrom("RCurl",getURL,curlEscape,curlUnescape)
 importFrom("textcat",textcat)
+importFrom("parallel",mclapply)
 export("translate",
        "print.translateClass")
