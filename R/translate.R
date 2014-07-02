@@ -1,12 +1,34 @@
-# Class for objects returned by translate()
-print.translateClass <- function(x){
-    print(x$translated.text)
-}
-
 translate <- function(dataset = NULL, content.field = NULL, content.vec = NULL,
                       api.key = NULL, translator = 'Google', source.lang = NULL, target.lang = NULL){
 
     # Do some sanity checking
+    validateInput(dataset, content.field, content.vec, api.key, translator, source.lang, target.lang)
+
+    # Get translation vector
+    if(!(is.null(dataset))){
+        to.translate <- dataset[[content.field]]
+    }
+    if(!(is.null(content.vec))){
+        to.translate <- content.vec
+    }
+
+    # Do the translation
+    if(translator == 'Google'){
+        translated <- googleTranslate(to.translate, api.key, source.lang, target.lang)
+    }
+
+    # Figure out what we should return
+    if(!(is.null(content.vec))){
+        return(translated)
+    }
+    if(!(is.null(dataset) & is.null(content.field))){
+        dataset$translatedContent <- translated
+        return(dataset)
+    }
+}
+
+
+validateInput <- function(dataset, content.field, content.vec, api.key, translator, source.lang, target.lang){
     if(is.character(api.key) == FALSE){
         stop("api.key must be a character type.")
     }
@@ -50,23 +72,9 @@ translate <- function(dataset = NULL, content.field = NULL, content.vec = NULL,
     }
 }
 
-translate <- function(to.translate, source.lang, target.lang, key){
-    out <- translateText(to.translate, source.lang, target.lang, key)
-    class(out) <- 'translateClass'
-    return(out)
-}
-
-translateText <- function(to.translate, source.lang, target.lang, key){
-    to.translate.original <- to.translate
-    translated <- gTranslate(to.translate, source.lang, target.lang, key)
-    out <- list(translated.text = translated, source.text = to.translate.original,
-                source.lang = source.lang, target.lang = target.lang, key = key)
-    return(out)
-}
-
-gTranslate <- function(to.translate, source.lang, target.lang, key){
+googleTranslate <- function(to.translate, api.key, source.lang, target.lang){
     base <- 'https://www.googleapis.com/language/translate/v2?'
-    key.str <- paste('key=', key, sep = '')
+    key.str <- paste('key=', api.key, sep = '')
     query <- paste('&q=', curlEscape(to.translate), sep = '')
     source.str <- paste('&source=', source.lang, sep = '')
     target.str <- paste('&target=', target.lang, sep = '')
