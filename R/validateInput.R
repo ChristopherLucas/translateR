@@ -1,10 +1,25 @@
-validateInput <- function(dataset, content.field, content.vec, api.key, translator, source.lang, target.lang){
-    if(is.character(api.key) == FALSE){
-        stop("api.key must be a character type.")
+validateInput <- function(dataset, content.field, content.vec, api.key, client.id, client.secret,
+                          translator, source.lang, target.lang){
+
+    if(translator == 'Google'){
+        if(is.character(api.key) == FALSE){
+            stop("You must provide a valid api.key as character to use the Google translator.")
+        }
     }
+    if(translator == 'Microsoft'){
+        if(is.character(client.id) == FALSE){
+            stop("You must provide a valid client.id as character to use the Microsoft translator.")
+        }
+        if(is.character(client.secret) == FALSE){
+            stop("You must provide a valid client.secret as character to use the Microsoft translator.")
+        }
+        
+    }
+    
     if((is.null(dataset) | is.null(content.field)) & is.null(content.vec)){
         stop("You must either provide both a dataset and the content field or a single vector of content.")
     }
+
     if(!(translator %in% c('Google', 'Microsoft'))){
         stop("You must select either 'Google' or 'Microsoft' as the translator.")
     }
@@ -39,5 +54,19 @@ validateInput <- function(dataset, content.field, content.vec, api.key, translat
     }
     if(!(is.null(content.vec))){
         if(!(is.character(content.vec))){stop("content.vec must be a character vector.")}
+    }
+}
+
+checkLang <- function(to.translate, source.lang, translator){
+    combined.vec <- paste(to.translate, collapse = ' ')
+    guessed.lang <- toupper(textcat(combined.vec))
+    indicated.lang <- toupper(names(languages[[translator]][unlist(languages[[translator]]) == source.lang]))
+
+    if(!(guessed.lang %in% indicated.lang)){
+        msg <- paste("\nThe content appears to be in ", guessed.lang, ". However, the language code you provided suggests that the text is in ", indicated.lang, ". If you entered the wrong language code, stop the process. Otherwise, translateR will treat the text as ", indicated.lang, '.', sep = '')
+
+        msg = strwrap(msg, width = 0.9 * getOption("width"))
+        msg <- paste(msg, collapse="\n")       
+        warning(msg, call. = FALSE)
     }
 }
