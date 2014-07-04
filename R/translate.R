@@ -1,4 +1,5 @@
-translate <- function(dataset = NULL, content.field = NULL, content.vec = NULL,
+translate <-
+function(dataset = NULL, content.field = NULL, content.vec = NULL,
                       api.key = NULL, client.id = NULL, client.secret = NULL,
                       translator = 'Google', source.lang = NULL, target.lang = NULL){
 
@@ -47,54 +48,3 @@ translate <- function(dataset = NULL, content.field = NULL, content.vec = NULL,
         return(dataset)
     }
 }
-
-getAccessToken <- function(client.id, client.secret){
-    fields <- list(
-        client_id = client.id,
-        client_secret = client.secret,
-        scope = 'http://api.microsofttranslator.com',
-        grant_type = 'client_credentials'
-        )
-
-    return(
-        fromJSON(postForm('https://datamarket.accesscontrol.windows.net/v2/OAuth2-13',
-                          .params = fields,
-                          style = 'POST'))[['access_token']]
-        )
-}
-    
-microsoftTranslate <- function(x, access.token, source.lang, target.lang){
-    params = paste("text=", URLencode(x), "&to=", target.lang, "&from=", source.lang, sep = '')
-    translateUrl = paste("http://api.microsofttranslator.com/v2/Http.svc/Translate?", params, sep = '')
-    
-    return(
-        cleanFun(
-            GET(translateUrl, add_headers(Authorization = paste('Bearer', access.token)))
-            )
-        )
-}
-
-googleTranslate <- function(x, api.key, source.lang, target.lang){
-    base <- 'https://www.googleapis.com/language/translate/v2?'
-    key.str <- paste('key=', api.key, sep = '')
-    query <- paste('&q=', curlEscape(x), sep = '')
-    source.str <- paste('&source=', source.lang, sep = '')
-    target.str <- paste('&target=', target.lang, sep = '')
-    
-    api.url <- paste(base, key.str, query, source.str, target.str, sep = '')
- 
-    translated <- fromJSON(getURL(api.url))$data$translations[[1]]
-    return(translated)
-}
-
-cleanFun <- function(htmlString) {
-  return(gsub("<.*?>", "", htmlString))
-}
-
-
-
-
-    
-
-   
- 
