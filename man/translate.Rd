@@ -2,39 +2,73 @@
 \alias{translate}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Translate text with the Google or the Microsoft Translation APIs.}
-\description{This function }
+\description{This function provides easy access to the Microsoft and
+  Google Translation APis. It can translate any language supported by
+  the APIs (to see a list of the available languages, see the
+  getGoogleLanguages() and getMicrosoftLanguages()
+  functions). Text can be provided as either a column in a dataframe or
+  as a single vector of text, where the elements are the documents to be
+  translated. Translated text is returned in the format it was
+  provided. If text is provided as a single vector, translate() returns
+  a single vector of translated text. If a dataframe is provided, the
+  user must specify which columns contains the text that is to be
+  translated. Translated text is then bound to the dataframe and the
+  entire dataframe is returned. The user must provide either a dataset
+  and the content.field (column name) that contains the text to be
+  translated, or a contect.vec (a character vector) where the elements
+  are the text to be translated.}
 \usage{
 translate(dataset = NULL, content.field = NULL, content.vec = NULL, api.key = NULL, client.id = NULL, client.secret = NULL, translator = "Google", source.lang = NULL, target.lang = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{dataset}{
-%%     ~~Describe \code{dataset} here~~
+A dataframe with a column containing the text. 
 }
   \item{content.field}{
-%%     ~~Describe \code{content.field} here~~
+If a dataframe is passed to "dataset", the name of the column containing
+the text must be passed to "content.field".
 }
   \item{content.vec}{
-%%     ~~Describe \code{content.vec} here~~
+A character vector of text. This is an alternative to "dataset"/"content.field".
 }
   \item{api.key}{
-%%     ~~Describe \code{api.key} here~~
+To use the Google API, an API key must be provided. For more
+information on getting your key, see https://developers.google.com/translate/v2/getting_started.
 }
   \item{client.id}{
-%%     ~~Describe \code{client.id} here~~
-}
+To use the Microsoft API, a client id and a client secret must be
+provided. For more information on getting these, see
+http://msdn.microsoft.com/en-us/library/hh454950.aspx.
+NOTE: you do not need to obtain an access token. translateR will
+retrieve a token internally.
+  }
   \item{client.secret}{
-%%     ~~Describe \code{client.secret} here~~
+To use the Microsoft API, a client id and a client secret must be
+provided. For more information on getting these, see
+http://msdn.microsoft.com/en-us/library/hh454950.aspx.
+NOTE: you do not need to obtain an access token. translateR will
+retrieve a token internally.
 }
   \item{translator}{
-%%     ~~Describe \code{translator} here~~
-}
+    The API that is to be used, either "Google" or "Microsoft".
+    Google is the default translator but will not work without a
+    user-supplied API key.
+  }
   \item{source.lang}{
-%%     ~~Describe \code{source.lang} here~~
-}
+    The language code that corresponds with the language in which the
+    source text is written. The translators use different language
+    codes, so select accordingly. To see a list of language codes, enter
+    getGoogleLanguages() or getMicrosoftLanguages() for Google or
+    Microsoft, respectively.
+  }
   \item{target.lang}{
-%%     ~~Describe \code{target.lang} here~~
-}
+    The language code that corresponds with the language into which the
+    source text is to be translated. The translators use different language
+    codes, so select accordingly. To see a list of language codes, enter
+    getGoogleLanguages() or getMicrosoftLanguages() for Google or
+    Microsoft, respectively.
+  }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -62,51 +96,7 @@ translate(dataset = NULL, content.field = NULL, content.vec = NULL, api.key = NU
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (dataset = NULL, content.field = NULL, content.vec = NULL, 
-    api.key = NULL, client.id = NULL, client.secret = NULL, translator = "Google", 
-    source.lang = NULL, target.lang = NULL) 
-{
-    validateInput(dataset, content.field, content.vec, api.key, 
-        client.id, client.secret, translator, source.lang, target.lang)
-    if (!(is.null(dataset))) {
-        to.translate <- dataset[[content.field]]
-    }
-    if (!(is.null(content.vec))) {
-        to.translate <- content.vec
-    }
-    checkLang(to.translate, source.lang, translator)
-    if (translator == "Google") {
-        translated <- unname(unlist(mclapply(to.translate, function(x) googleTranslate(x, 
-            api.key, source.lang, target.lang))))
-    }
-    if (translator == "Microsoft") {
-        ptm <- proc.time()
-        access.token <- getAccessToken(client.id, client.secret)
-        translated <- c()
-        for (doc in to.translate) {
-            translated <- c(translated, microsoftTranslate(doc, 
-                access.token, source.lang, target.lang))
-            if ((proc.time() - ptm)[3] > 540) {
-                ptm <- proc.time()
-                access.token <- getAccessToken(client.id, client.secret)
-            }
-        }
-    }
-    if (!(is.null(content.vec))) {
-        return(translated)
-    }
-    if (!(is.null(dataset) & is.null(content.field))) {
-        dataset$translatedContent <- translated
-        return(dataset)
-    }
-  }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{ ~kwd1 }
 \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
