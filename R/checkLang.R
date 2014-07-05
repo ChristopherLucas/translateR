@@ -1,5 +1,6 @@
 checkLang <-
 function(to.translate, source.lang, translator){
+    languages <- getLanguages()
     combined.vec <- paste(to.translate, collapse = ' ')
     guessed.lang <- toupper(textcat(combined.vec))
     indicated.lang <- toupper(names(languages[[translator]][unlist(languages[[translator]]) == source.lang]))
