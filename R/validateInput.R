@@ -10,8 +10,8 @@ validateInput <-
             }
     
         if(is.null(api.key)){
-            translator <- 'Google'
-        } else{translator <- 'Microsoft'}
+            translator <- 'Microsfot'
+        } else{translator <- 'Google'}
         
         if((is.null(dataset) | is.null(content.field)) & is.null(content.vec)){
             stop("You must either provide both a dataset and the content field or a single vector of content.")
