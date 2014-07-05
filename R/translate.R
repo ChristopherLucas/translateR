@@ -4,9 +4,12 @@ function(dataset = NULL, content.field = NULL, content.vec = NULL,
                       source.lang = NULL, target.lang = NULL){
 
     # Do some sanity checking
-    translator <- validateInput(dataset, content.field, content.vec, google.api.key, microsoft.client.id, microsoft.client.secret,
+    translator <- validateInput(dataset, content.field, content.vec, google.api.key,
+                                microsoft.client.id, microsoft.client.secret,
                                 source.lang, target.lang)
 
+    print(translator)
+    
     # Get translation vector
     if(!(is.null(dataset))){
         to.translate <- dataset[[content.field]]
