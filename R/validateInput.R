@@ -16,6 +16,8 @@ validateInput <-
         if((is.null(dataset) | is.null(content.field)) & is.null(content.vec)){
             stop("You must either provide both a dataset and the content field or a single vector of content.")
         }
+
+        languages <- languageCodes()
         
         if(translator == 'Google'){
             if(!(source.lang %in% unname(unlist(languages['Google'])))){
