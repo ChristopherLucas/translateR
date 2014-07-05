@@ -12,13 +12,14 @@
   provided. If text is provided as a single vector, translate() returns
   a single vector of translated text. If a dataframe is provided, the
   user must specify which columns contains the text that is to be
-  translated. Translated text is then bound to the dataframe and the
+  translated. Translated text is then bound to the dataframe in a new
+  column named "translatedContent" and the
   entire dataframe is returned. The user must provide either a dataset
   and the content.field (column name) that contains the text to be
   translated, or a contect.vec (a character vector) where the elements
-  are the text to be translated. Chris when it is appended to the data frame what is the new column called? Should there be a ne "new nae" option in this case?}
+  are the text to be translated.}
 \usage{
-translate(dataset = NULL, content.field = NULL, content.vec = NULL, api.key = NULL, client.id = NULL, client.secret = NULL, translator = "Google", source.lang = NULL, target.lang = NULL)
+translate(dataset = NULL, content.field = NULL, content.vec = NULL, google.api.key = NULL, microsoft.client.id = NULL, microsoft.client.secret = NULL, translator = "Google", source.lang = NULL, target.lang = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -32,22 +33,25 @@ the text must be passed to "content.field".
   \item{content.vec}{
 A character vector of text. This is an alternative to "dataset"/"content.field".
 }
-  \item{api.key}{
-Chris maybe this should be called google.api.key? To use the Google API, an API key must be provided. For more
+  \item{google.api.key}{
+To use the Google API, an API key must be provided. For more
 information on getting your key, see https://developers.google.com/translate/v2/getting_started.
 }
-  \item{client.id}{
-Chris maybe call this microsoft.client.id To use the Microsoft API, a client id and a client secret must be
+  \item{microsoft.client.id}{
+Chris maybe call this microsoft.client.id To use the Microsoft API, a
+client id and a client secret value must be
 provided. For more information on getting these, see
-http://msdn.microsoft.com/en-us/library/hh454950.aspx. Chris tell people what a client secret is in one sentence...it sounds weird.
+http://msdn.microsoft.com/en-us/library/hh454950.aspx. 
 NOTE: you do not need to obtain an access token. translateR will
 retrieve a token internally.
   }
-  \item{client.secret}{
-To use the Microsoft API, a client id and a client secret must be
+  \item{microsoft.client.secret}{
+To use the Microsoft API, a client id and a client secret value must be
 provided. For more information on getting these, see
-http://msdn.microsoft.com/en-us/library/hh454950.aspx.
-NOTE: you do not need to obtain an access token. translateR will
+http://msdn.microsoft.com/en-us/library/hh454950.aspx. The client secret
+value is a unique identifying string obtained when registering with Microsoft (see
+the link for more information). NOTE: you do not need to
+obtain an access token. translateR will
 retrieve a token internally.
 }
   \item{translator}{

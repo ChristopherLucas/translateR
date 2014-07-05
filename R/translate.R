@@ -1,11 +1,11 @@
 translate <-
 function(dataset = NULL, content.field = NULL, content.vec = NULL,
-                      api.key = NULL, client.id = NULL, client.secret = NULL,
-                      translator = 'Google', source.lang = NULL, target.lang = NULL){
+                      google.api.key = NULL, microsoft.client.id = NULL, microsoft.client.secret = NULL,
+                      source.lang = NULL, target.lang = NULL){
 
     # Do some sanity checking
-    validateInput(dataset, content.field, content.vec, api.key, client.id, client.secret,
-                          translator, source.lang, target.lang)
+    translator <- validateInput(dataset, content.field, content.vec, google.api.key, microsoft.client.id, microsoft.client.secret,
+                                source.lang, target.lang)
 
     # Get translation vector
     if(!(is.null(dataset))){
@@ -21,20 +21,20 @@ function(dataset = NULL, content.field = NULL, content.vec = NULL,
     if(translator == 'Google'){
         translated <- unname(
             unlist(
-                mclapply(to.translate, function(x) googleTranslate(x, api.key, source.lang, target.lang))
+                mclapply(to.translate, function(x) googleTranslate(x, google.api.key, source.lang, target.lang))
                 )
             )
     }
 
     if(translator == 'Microsoft'){ 
         ptm <- proc.time()
-        access.token <- getAccessToken(client.id, client.secret)
+        access.token <- getAccessToken(microsoft.client.id, microsoft.client.secret)
         translated <- c()
         for(doc in to.translate){
             translated <- c(translated, microsoftTranslate(doc, access.token, source.lang, target.lang))
             if((proc.time() - ptm)[3] > 540){
                 ptm <- proc.time()
-                access.token <- getAccessToken(client.id, client.secret)
+                access.token <- getAccessToken(microsoft.client.id, microsoft.client.secret)
             }
         }
     }
