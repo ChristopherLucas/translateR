@@ -102,7 +102,27 @@ Chris make sure to define here what gets returned if appropriate?
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
+\dontrun{
+# Load example data. Three columns, the text content ('email') and two metadata fields (date and subject)
+data(enron)
 
+# Google, translate column in dataset
+google.dataset.out <- translate(dataset = enron, content.field = 'email', google.api.key = my.api.key,
+                         source.lang = 'en', target.lang = 'de')
+
+# Google, translate vector
+google.vector.out <- translate(content.vec = enron$email, google.api.key = my.api.key,
+                         source.lang = 'en', target.lang = 'de')
+
+# Microsoft, translate column in dataset
+google.dataset.out <- translate(dataset = enron, content.field = 'email', microsoft.client.id = my.client.id,
+                         microsoft.client.secret = my.client.secret, source.lang = 'en', target.lang = 'de')
+
+# Microsoft, translate vector
+google.vector.out <- translate(content.vec = enron$email, microsoft.client.id = my.client.id,
+                        microsoft.client.secret = my.client.secret, source.lang = 'en',
+                        target.lang = 'de')
+}
 }
 \keyword{ ~kwd1 }
 \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
