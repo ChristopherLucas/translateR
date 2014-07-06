@@ -10,7 +10,7 @@ validateInput <-
             }
     
         if(is.null(api.key)){
-            translator <- 'Microsfot'
+            translator <- 'Microsoft'
         } else{translator <- 'Google'}
         
         if((is.null(dataset) | is.null(content.field)) & is.null(content.vec)){
