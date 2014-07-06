@@ -78,13 +78,8 @@ retrieve a token internally.
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-
-Chris make sure to define here what gets returned if appropriate?
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+\texttt{translate} returns a dataframe if it is passed a dataframe and a
+character vector if it is passed a character vector.
 }
 \references{
 %% ~put references to the literature/web site here ~
