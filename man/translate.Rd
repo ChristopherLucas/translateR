@@ -78,7 +78,7 @@ retrieve a token internally.
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-\texttt{translate} returns a dataframe if it is passed a dataframe and a
+\code{translate} returns a dataframe if it is passed a dataframe and a
 character vector if it is passed a character vector.
 }
 \references{
