@@ -11,7 +11,7 @@
   translated. Translated text is returned in the format it was
   provided. If text is provided as a single vector, translate() returns
   a single vector of translated text. If a dataframe is provided, the
-  user must specify which columns contains the text that is to be
+  user must specify which column contains the text that is to be
   translated. Translated text is then bound to the dataframe in a new
   column named "translatedContent" and the
   entire dataframe is returned. The user must provide either a dataset
@@ -19,7 +19,7 @@
   translated, or a contect.vec (a character vector) where the elements
   are the text to be translated.}
 \usage{
-translate(dataset = NULL, content.field = NULL, content.vec = NULL, google.api.key = NULL, microsoft.client.id = NULL, microsoft.client.secret = NULL, translator = "Google", source.lang = NULL, target.lang = NULL)
+translate(dataset = NULL, content.field = NULL, content.vec = NULL, google.api.key = NULL, microsoft.client.id = NULL, microsoft.client.secret = NULL, source.lang = NULL, target.lang = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -54,25 +54,20 @@ the link for more information). NOTE: you do not need to
 obtain an access token. translateR will
 retrieve a token internally.
 }
-  \item{translator}{
-    The API that is to be used, either "Google" or "Microsoft".
-    Google is the default translator but will not work without a
-    user-supplied API key.
-  }
-  \item{source.lang}{
-    The language code that corresponds with the language in which the
-    source text is written. The translators use different language
-    codes, so select accordingly. To see a list of language codes, enter
-    getGoogleLanguages() or getMicrosoftLanguages() for Google or
-    Microsoft, respectively.
-  }
-  \item{target.lang}{
-    The language code that corresponds with the language into which the
-    source text is to be translated. The translators use different language
-    codes, so select accordingly. To see a list of language codes, enter
-    getGoogleLanguages() or getMicrosoftLanguages() for Google or
-    Microsoft, respectively.
-  }
+\item{source.lang}{
+  The language code that corresponds with the language in which the
+  source text is written. The translators use different language
+  codes, so select accordingly. To see a list of language codes, enter
+  getGoogleLanguages() or getMicrosoftLanguages() for Google or
+  Microsoft, respectively.
+}
+\item{target.lang}{
+  The language code that corresponds with the language into which the
+  source text is to be translated. The translators use different language
+  codes, so select accordingly. To see a list of language codes, enter
+  getGoogleLanguages() or getMicrosoftLanguages() for Google or
+  Microsoft, respectively.
+}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
