@@ -7,6 +7,8 @@ function(dataset = NULL, content.field = NULL, content.vec = NULL,
     translator <- validateInput(dataset, content.field, content.vec, google.api.key,
                                 microsoft.client.id, microsoft.client.secret,
                                 source.lang, target.lang)
+
+    print(translator)
     
     # Get translation vector
     if(!(is.null(dataset))){
