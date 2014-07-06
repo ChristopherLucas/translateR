@@ -1,6 +1,7 @@
 importFrom("RJSONIO",fromJSON)
 importFrom("RCurl",getURL,curlEscape,postForm)
 importFrom("textcat",textcat)
+importFrom("httr",GET)
 importFrom("parallel",mclapply)
 export("translate",
        "getMicrosoftLanguages",
