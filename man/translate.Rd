@@ -38,7 +38,7 @@ To use the Google API, an API key must be provided. For more
 information on getting your key, see https://developers.google.com/translate/v2/getting_started.
 }
   \item{microsoft.client.id}{
-Chris maybe call this microsoft.client.id To use the Microsoft API, a
+To use the Microsoft API, a
 client id and a client secret value must be
 provided. For more information on getting these, see
 http://msdn.microsoft.com/en-us/library/hh454950.aspx. 
