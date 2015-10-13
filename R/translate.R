@@ -1,8 +1,11 @@
 translate <-
 function(dataset = NULL, content.field = NULL, content.vec = NULL,
                       google.api.key = NULL, microsoft.client.id = NULL, microsoft.client.secret = NULL,
-                      source.lang = NULL, target.lang = NULL){
+                      source.lang = NULL, target.lang = NULL, RCurlOptions = NULL){
 
+    if(!is.null(RCurlOptions)){
+        options(RCurlOptions = RCurlOptions)
+    }
     # Do some sanity checking
     translator <- validateInput(dataset, content.field, content.vec, google.api.key,
                                 microsoft.client.id, microsoft.client.secret,
