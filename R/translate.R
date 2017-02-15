@@ -18,8 +18,6 @@ function(dataset = NULL, content.field = NULL, content.vec = NULL,
     if(!(is.null(content.vec))){
         to.translate <- content.vec
     }
-
-    checkLang(to.translate, source.lang, translator)
     
     # Do the translation
     if(translator == 'Google'){
