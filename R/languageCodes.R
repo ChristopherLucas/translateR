@@ -70,7 +70,7 @@ languageCodes <- function(){
             Mongolian =             'mn',
             Nepali =                'ne',
             Norwegian =             'no',
-            Pashto                  'ps',
+            Pashto =                'ps',
             Persian =               'fa',
             Polish =                'pl',
             Portuguese =            'pt',
