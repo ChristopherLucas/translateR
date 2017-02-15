@@ -77,7 +77,7 @@ languageCodes <- function(){
             Punjabi =               'pa',
             Romanian =              'ro',
             Russian =               'ru',
-            Samoan                  'sm',
+            Samoan =                'sm',
             Scots_Gaelic            'gd',
             Serbian =               'sr',
             Sesotho =               'st',
