@@ -1,6 +1,6 @@
 translate <-
 function(dataset = NULL, content.field = NULL, content.vec = NULL,
-                      google.api.key = NULL, microsoft.client.id = NULL, microsoft.client.secret = NULL,
+                      google.api.key = NULL, microsoft.api.key = NULL,
                       source.lang = NULL, target.lang = NULL, RCurlOptions = NULL){
 
     if(!is.null(RCurlOptions)){
@@ -8,7 +8,7 @@ function(dataset = NULL, content.field = NULL, content.vec = NULL,
     }
     # Do some sanity checking
     translator <- validateInput(dataset, content.field, content.vec, google.api.key,
-                                microsoft.client.id, microsoft.client.secret,
+                                microsoft.api.key,
                                 source.lang, target.lang)
     
     # Get translation vector
@@ -29,16 +29,11 @@ function(dataset = NULL, content.field = NULL, content.vec = NULL,
     }
 
     if(translator == 'Microsoft'){ 
-        ptm <- proc.time()
-        access.token <- getAccessToken(microsoft.client.id, microsoft.client.secret)
-        translated <- c()
-        for(doc in to.translate){
-            translated <- c(translated, microsoftTranslate(doc, access.token, source.lang, target.lang))
-            if((proc.time() - ptm)[3] > 540){
-                ptm <- proc.time()
-                access.token <- getAccessToken(microsoft.client.id, microsoft.client.secret)
-            }
-        }
+        translated <- unname(
+          unlist(
+            mclapply(to.translate, function(x) microsoftTranslate(x, microsoft.api.key, source.lang, target.lang))
+          )
+        )
     }
 
     # Figure out what we should return

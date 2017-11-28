@@ -1,15 +1,15 @@
 validateInput <-
-    function(dataset, content.field, content.vec, api.key, client.id, client.secret,
+    function(dataset, content.field, content.vec, google.api.key, microsoft.api.key,
              source.lang, target.lang){
         
-        if((is.null(api.key) & (is.null(client.id) | is.null(client.secret)))
+        if((is.null(google.api.key) & (is.null(microsoft.api.key)))
            |
-           (!is.null(api.key) & !is.null(client.id) & !is.null(client.secret)))
+           (!is.null(google.api.key) & !is.null(microsoft.api.key)))
             {            
                 stop('You must select either the Google or the Microsoft Translator. To select the Google Translator, pass a valid Google Translate api key to api.key. To select the Microsoft Translator, pass a valid Microsoft client id and client secret number to client.id and client.secret. You must select either Microsoft or Google, not both.')
             }
     
-        if(is.null(api.key)){
+        if(is.null(google.api.key)){
             translator <- 'Microsoft'
         } else{translator <- 'Google'}
         
