@@ -1,6 +1,6 @@
 validateInput <-
     function(dataset, content.field, content.vec, google.api.key, microsoft.api.key,
-             source.lang, target.lang){
+             source.lang, target.lang, microsoft.token){
         
         if((is.null(google.api.key) & (is.null(microsoft.api.key)))
            |
@@ -51,5 +51,7 @@ validateInput <-
         if(!(is.null(content.vec))){
             if(!(is.character(content.vec))){stop("content.vec must be a character vector.")}
         }
+        if(!(microsoft.token=="TRUE" | microsoft.token == "FALSE")){stop("microsoft.token must be a boolean value.")}
+        
         return(translator)
     }
