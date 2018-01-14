@@ -31,12 +31,13 @@ function(dataset = NULL, content.field = NULL, content.vec = NULL,
     #for longer translation, recommend token method
     if(translator == 'Microsoft' & microsoft.token){
       ptm <- proc.time()
-      access.token <- getAccessToken(api.key)
+      access.token <- getAccessToken(microsoft.api.key)
+	  translated <- c()
       for(doc in to.translate){
-        translated <- c(translated, microsoftTranslateToken(x, access.token, "ko", "en"))
+        translated <- c(translated, microsoftTranslateToken(doc, access.token, source.lang, target.lang))
         if((proc.time() - ptm)[3] > 540){
           ptm <- proc.time()
-          access.token <- getAccessToken(api.key)
+          access.token <- getAccessToken(microsoft.api.key)
         }
       }
     
