@@ -35,38 +35,30 @@ A character vector of text. This is an alternative to "dataset"/"content.field".
 }
   \item{google.api.key}{
 To use the Google API, an API key must be provided. For more
-information on getting your key, see https://developers.google.com/translate/v2/getting_started.
+information on getting your key, see http://support.google.com/cloud/answer/6158862?hl=en .
 }
-  \item{microsoft.client.id}{
-To use the Microsoft API, a
-client id and a client secret value must be
-provided. For more information on getting these, see
-http://msdn.microsoft.com/en-us/library/hh454950.aspx. 
-NOTE: you do not need to obtain an access token. translateR will
-retrieve a token internally.
-  }
-  \item{microsoft.client.secret}{
-To use the Microsoft API, a client id and a client secret value must be
-provided. For more information on getting these, see
-http://msdn.microsoft.com/en-us/library/hh454950.aspx. The client secret
-value is a unique identifying string obtained when registering with Microsoft (see
-the link for more information). NOTE: you do not need to
-obtain an access token. translateR will
-retrieve a token internally.
+\item{microsoft.api.key}{
+To use the Microsoft API, an API key must be provided from Microsoft Azure Cognitive Services. For
+more information on getting your key, see http://www.microsoft.com/en-us/translator/trial.aspx .
+}
+\item{microsoft.token}{
+While using the Microsoft API, you have choice of using access token or not. If value is set as TRUE, then
+translateR will retrieve a token internally and process the request. Token method is recommended for longer translation.
+Default value is set as FALSE. 
 }
 \item{source.lang}{
-  The language code that corresponds with the language in which the
-  source text is written. The translators use different language
-  codes, so select accordingly. To see a list of language codes, enter
-  getGoogleLanguages() or getMicrosoftLanguages() for Google or
-  Microsoft, respectively.
+The language code that corresponds with the language in which the
+source text is written. The translators use different language
+codes, so select accordingly. To see a list of language codes, enter
+getGoogleLanguages() or getMicrosoftLanguages() for Google or
+Microsoft, respectively.
 }
 \item{target.lang}{
-  The language code that corresponds with the language into which the
-  source text is to be translated. The translators use different language
-  codes, so select accordingly. To see a list of language codes, enter
-  getGoogleLanguages() or getMicrosoftLanguages() for Google or
-  Microsoft, respectively.
+The language code that corresponds with the language into which the
+source text is to be translated. The translators use different language
+codes, so select accordingly. To see a list of language codes, enter
+getGoogleLanguages() or getMicrosoftLanguages() for Google or
+Microsoft, respectively.
 }
 }
 \details{
