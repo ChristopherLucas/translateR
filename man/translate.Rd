@@ -19,7 +19,9 @@
   translated, or a contect.vec (a character vector) where the elements
   are the text to be translated.}
 \usage{
-translate(dataset = NULL, content.field = NULL, content.vec = NULL, google.api.key = NULL, microsoft.client.id = NULL, microsoft.client.secret = NULL, source.lang = NULL, target.lang = NULL)
+translate(dataset = NULL, content.field = NULL, content.vec = NULL, 
+	google.api.key = NULL, microsoft.api.key = NULL, source.lang = NULL, 
+	target.lang = NULL, microsoft.token = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -34,17 +36,19 @@ the text must be passed to "content.field".
 A character vector of text. This is an alternative to "dataset"/"content.field".
 }
   \item{google.api.key}{
-To use the Google API, an API key must be provided. For more
-information on getting your key, see http://support.google.com/cloud/answer/6158862?hl=en .
+To use the Google API, an API key must be provided. For more information
+on getting your key, see \href{http://support.google.com/cloud/answer/6158862?hl=en}{
+here}.
 }
 \item{microsoft.api.key}{
-To use the Microsoft API, an API key must be provided from Microsoft Azure Cognitive Services. For
-more information on getting your key, see http://www.microsoft.com/en-us/translator/trial.aspx .
+To use the Microsoft API, an API key must be provided from Microsoft Azure Cognitive
+ Services. For more information on getting your key, see 
+ \href{http://www.microsoft.com/en-us/translator/trial.aspx}{here}.
 }
 \item{microsoft.token}{
-While using the Microsoft API, you have choice of using access token or not. If value is set as TRUE, then
-translateR will retrieve a token internally and process the request. Token method is recommended for longer translation.
-Default value is set as FALSE. 
+While using the Microsoft API, you have choice of using access token or not. If value is
+ set as TRUE, then translateR will retrieve a token internally and process the request.
+ Token method is recommended for longer translation. Default value is set as FALSE. 
 }
 \item{source.lang}{
 The language code that corresponds with the language in which the
@@ -85,25 +89,29 @@ character vector if it is passed a character vector.
 }
 \examples{
 \dontrun{
-# Load example data. Three columns, the text content ('email') and two metadata fields (date and subject)
+# Load example data. Three columns, the text content ('email') and two
+# metadata fields (date and subject) 
 data(enron)
 
 # Google, translate column in dataset
-google.dataset.out <- translate(dataset = enron, content.field = 'email', google.api.key = my.api.key,
-                         source.lang = 'en', target.lang = 'de')
+google.dataset.out <- translate(dataset = enron, content.field = 'email', 
+			google.api.key = my.google.key, source.lang = 'en', 
+			target.lang = 'de')
 
 # Google, translate vector
-google.vector.out <- translate(content.vec = enron$email, google.api.key = my.api.key,
-                         source.lang = 'en', target.lang = 'de')
+google.vector.out <- translate(content.vec = enron$email, 
+			google.api.key = my.google.key,
+                        source.lang = 'en', target.lang = 'de')
 
 # Microsoft, translate column in dataset
-google.dataset.out <- translate(dataset = enron, content.field = 'email', microsoft.client.id = my.client.id,
-                         microsoft.client.secret = my.client.secret, source.lang = 'en', target.lang = 'de')
+google.dataset.out <- translate(dataset = enron, content.field = 'email', 
+			microsoft.api.key = my.microsoft.key, source.lang = 'en', 
+			target.lang = 'de')
 
 # Microsoft, translate vector
-google.vector.out <- translate(content.vec = enron$email, microsoft.client.id = my.client.id,
-                        microsoft.client.secret = my.client.secret, source.lang = 'en',
-                        target.lang = 'de')
+google.vector.out <- translate(content.vec = enron$email, 
+			microsoft.api.key = my.microsoft.key, source.lang = 'en',
+			target.lang = 'de')
 }
 }
 \keyword{ ~kwd1 }
