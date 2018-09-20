@@ -1,12 +1,10 @@
-
 Package: translateR
-Type: Package
 Title: Bindings for the Google and Microsoft Translation APIs
 Version: 2.0
 Date: 2018-01-23
 Author: Christopher Lucas, Dustin Tingley, and Vasundhara Dehiya
 Maintainer: Christopher Lucas <clucas@fas.harvard.edu>
-Description: translateR provides easy access to the Google and Microsoft APIs. The 
+Description: Provides easy access to the Google and Microsoft APIs. The 
 	package is easy to use with the related R package "stm" for the estimation of 
 	multilingual topic models.
 Imports: RJSONIO,RCurl,parallel,httr,utils
