@@ -65,28 +65,6 @@ getGoogleLanguages() or getMicrosoftLanguages() for Google or
 Microsoft, respectively.
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
-\value{
-\code{translate} returns a dataframe if it is passed a dataframe and a
-character vector if it is passed a character vector.
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \examples{
 \dontrun{
 # Load example data. Three columns, the text content ('email') and two
@@ -114,5 +92,3 @@ google.vector.out <- translate(content.vec = enron$email,
 			target.lang = 'de')
 }
 }
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
