@@ -1,7 +1,7 @@
 # See documentation at 
 # https://docs.microsoft.com/en-us/azure/cognitive-services/translator/reference/v3-0-translate
 microsoftTranslate <-
-function(x, api.key, source.lang = NULL, target.lang){
+function(x, api.key, api.region, source.lang = NULL, target.lang){
     checkText(x)
     microsoft_langs <- languageCodes()$Microsoft
     if(!is.null(source.lang)) {
@@ -21,6 +21,7 @@ function(x, api.key, source.lang = NULL, target.lang){
       body = body,
       add_headers(
         "Ocp-Apim-Subscription-Key" = api.key,
+        "Ocp-Apim-Subscription-Region" = api.region, ## Adding Region after getting back an error regarding the connection
         "Content-Type" = "application/json; charset=UTF-8"
       ),
       query = query,
