@@ -1,6 +1,6 @@
 translate <-
 function(dataset = NULL, content.field = NULL, content.vec = NULL,
-                      google.api.key = NULL, microsoft.api.key = NULL,
+                      google.api.key = NULL, microsoft.api.key = NULL, microsoft.api.region = NULL,
                       source.lang = NULL, target.lang = NULL, microsoft.token=FALSE){
 
     # Do some sanity checking
@@ -42,7 +42,7 @@ function(dataset = NULL, content.field = NULL, content.vec = NULL,
       #without token method
         translated <- unname(
           unlist(
-            mclapply(to.translate, function(x) microsoftTranslate(x, microsoft.api.key, source.lang, target.lang))
+            mclapply(to.translate, function(x) microsoftTranslate(x, microsoft.api.key, microsoft.api.region, source.lang, target.lang))
           )
         )
     }
